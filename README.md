@@ -1,8 +1,9 @@
 # spotify_login_app
 
 Design : https://dribbble.com/shots/9828780-Mobile-Exploration-2-Redesign-Spotify-App-Light
-this project is implement neumorphism design and switch between light and dark theme.
-Don't copy this coding style, it's bad style.Because i use static data to speed up working time.
+  
+this project is implement neumorphism design and switch between light and dark theme.\
+Don't copy this coding style, it's bad style.Because i use static data to speed up working time.\
 ![alt text](https://cdn.dribbble.com/users/3949873/screenshots/9828780/media/cdd6a65f77e422ff8408843ff8a54aa4.png)
 
 A new Flutter project.
