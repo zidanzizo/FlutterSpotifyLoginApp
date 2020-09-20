@@ -3,6 +3,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flare_flutter/flare_actor.dart';
+import 'register_screen.dart';
 // import 'package:flare_flutter/trim_path.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -65,38 +66,47 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     children: [
                       SafeArea(
-                        child: Neumorphic(
-                          style: NeumorphicStyle(
-                              shape: NeumorphicShape.concave,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.circular(150)),
-                              depth: 6,
-                              intensity: 0.7,
-                              lightSource: LightSource.topLeft,
-                              color: Colors.white),
-                          child: SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: CircleAvatar(
-                              backgroundColor:
-                                  NeumorphicTheme.isUsingDark(context)
-                                      ? theme.baseColor
-                                      : Colors.white,
-                              backgroundImage:
-                                  AssetImage('assets/images/spotify.png'),
+                        child: Hero(
+                          tag: 'logo',
+                          child: Neumorphic(
+                            style: NeumorphicStyle(
+                                shape: NeumorphicShape.concave,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                    BorderRadius.circular(150)),
+                                depth: 6,
+                                intensity: 0.7,
+                                lightSource: LightSource.topLeft,
+                                color: Colors.white),
+                            child: SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    NeumorphicTheme.isUsingDark(context)
+                                        ? theme.baseColor
+                                        : Colors.white,
+                                backgroundImage:
+                                    AssetImage('assets/images/spotify.png'),
+                              ),
                             ),
                           ),
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.only(top: 10),
-                        child: Text(
-                          'Spotify',
-                          style: TextStyle(
-                            color: theme.accentColor,
-                            fontSize: 36,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'OpenSans',
+                        child: Hero(
+                          tag: 'spotify',
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              'Spotify',
+                              style: TextStyle(
+                                color: theme.accentColor,
+                                fontSize: 36,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'OpenSans',
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -286,7 +296,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: 5,
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                _createRoute(),
+                              );
+                            },
                             child: Text(
                               'Sign Up',
                               style: TextStyle(
@@ -311,4 +325,22 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => RegisterScreen(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(1.0, 0.0);
+      var end = Offset.zero;
+      var curve = Curves.slowMiddle;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }
